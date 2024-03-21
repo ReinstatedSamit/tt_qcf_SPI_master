@@ -15,7 +15,7 @@
 ////                                                                        ////
 ////////////////////////////////////////////////////////////////////////////////
 
-module tt_qcf_SPI_master(
+module tt_um_SPI_master(
         clk,/* Peripheral clock/not necessary to be core clock, the core clock can be different (input) */
         rst,/* Asynchronus reset, is mandatory to provide this signal, active on posedge (input) */
         data,/* In/Out data(bidirectional) */
