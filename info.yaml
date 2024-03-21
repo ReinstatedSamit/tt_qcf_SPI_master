@@ -37,7 +37,7 @@ pinout:
   uo[4]: "ss"
   uo[5]: "senderr"
   uo[6]: "charreceived"
-  uo[7]: "data_o[7]"
+  uo[7]: ""
 
   # Bidirectional pins
   uio[0]: "res_senderr"
