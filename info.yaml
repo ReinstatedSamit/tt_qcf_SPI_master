@@ -30,7 +30,7 @@ pinout:
   ui[7]: "mode"
 
   # Outputs
-  uo[0]: "data"
+  uo[0]: ""
   uo[1]: "buffempty"
   uo[2]: "sck"
   uo[3]: "mosi"
@@ -40,8 +40,8 @@ pinout:
   uo[7]: ""
 
   # Bidirectional pins
-  uio[0]: "res_senderr"
-  uio[1]: ""
+  uio[0]: "data"
+  uio[1]: "res_senderr"
   uio[2]: ""
   uio[3]: ""
   uio[4]: ""
