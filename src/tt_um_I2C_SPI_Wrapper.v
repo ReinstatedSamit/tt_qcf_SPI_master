@@ -1,5 +1,5 @@
 `timescale 1ns/100ps
-module I2C_SPI_Wrapper (
+module tt_um_I2C_SPI_Wrapper (
     // SPI interface
      output wire        sck_o,         // serial clock output
      output wire       mosi_o,        // MasterOut SlaveIN
