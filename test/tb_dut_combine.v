@@ -69,7 +69,7 @@ module tb_dut_combine(
 
 
     // hookup_wrapper
-     I2C_SPI_Wrapper wrapper(
+     tt_um_I2C_SPI_Wrapper wrapper(
                .sck_o(sck_o),
                .mosi_o(mosi_o),
                .miso_i(miso_i),
