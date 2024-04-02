@@ -17,7 +17,7 @@ module tt_um_I2C_to_SPI (
     .miso_i(ui_in[2]),
     .clk(i2c_wb_clk_i),
     .rst_n(i2c_wb_rst_i),
-    .sck_o(uo_out[0])),
+    .sck_o(uo_out[0]),
     .mosi_o(uo_out[1])
   )
     
