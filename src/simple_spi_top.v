@@ -257,7 +257,7 @@ module simple_spi_top(
           state <= 2'b00;//#1 2'b00; // idle
           bcnt  <= 3'h0;//#1 3'h0;
           treg  <=  8'h00;//#1 8'h00;
-          wfre  <= 1'b0//#1 1'b0;
+          wfre  <= 1'b0;//#1 1'b0;
           rfwe  <= 1'b0;//#1 1'b0;
           sck_o <= 1'b0;//#1 1'b0;
       end
@@ -292,9 +292,9 @@ module simple_spi_top(
                 bcnt <= bcnt -3'h1; //#1 bcnt -3'h1;
 
                 if (~|bcnt) begin
-                  state <= //#1 2'b00;
-                  sck_o <= //#1 cpol;
-                  rfwe  <= //#1 1'b1;
+                  state <= 2'b00;//#1 2'b00;
+                  sck_o <= cpol;//#1 cpol;
+                  rfwe  <= 1'b1;//#1 1'b1;
                 end else begin
                   state <= 2'b01;//#1 2'b01;
                   sck_o <= ~sck_o;//#1 ~sck_o;
