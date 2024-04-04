@@ -16,6 +16,13 @@ project:
   # List your project's source files here. Source files must be in ./src and you must list each source file separately, one per line:
   source_files:        
     - "tt_um_I2C_to_SPI.v"
+    - "tt_um_I2C_SPI_Wrapper.v"
+    - "tt_um_SPI_master.v"
+    - "simple_spi_top.v"
+    - "i2c_to_wb_top.v"
+    - "i2c_to_wb_if.v"
+    - "i2c_to_wb_fsm.v"
+    - "i2c_to_wb_config.v"
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
 pinout:
