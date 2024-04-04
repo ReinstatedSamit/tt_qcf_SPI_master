@@ -11,12 +11,22 @@ module tt_um_I2C_to_SPI (
     input  wire       rst_n     // reset_n - low to reset
 );
 
-  tt_um_I2C_SPI_Wrapper wrapper_inst(
+/*  tt_um_I2C_SPI_Wrapper wrapper_inst(
     .i2c_data_in(ui_in[0]),
     .i2c_clk_in(ui_in[1]),
     .miso_i(ui_in[2]),
     .clk(i2c_wb_clk_i),
     .rst_n(i2c_wb_rst_i),
+    .sck_o(uo_out[0]),
+    .mosi_o(uo_out[1])
+  );*/
+
+    tt_um_I2C_SPI_Wrapper wrapper_inst(
+    .i2c_data_in(ui_in[0]),
+    .i2c_clk_in(ui_in[1]),
+    .miso_i(ui_in[2]),
+    .i2c_wb_clk_i(clk),
+    .i2c_wb_rst_i(rst_n),
     .sck_o(uo_out[0]),
     .mosi_o(uo_out[1])
   );
