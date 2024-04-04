@@ -17,7 +17,6 @@ project:
   source_files:        
     - "tt_um_I2C_to_SPI.v"
     - "tt_um_I2C_SPI_Wrapper.v"
-    - "tt_um_SPI_master.v"
     - "simple_spi_top.v"
     - "i2c_to_wb_top.v"
     - "i2c_to_wb_if.v"
