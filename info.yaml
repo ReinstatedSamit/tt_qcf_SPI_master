@@ -48,10 +48,10 @@ pinout:
   uo[7]: ""
 
   # Bidirectional pins
-  uio[0]: ""
-  uio[1]: ""
-  uio[2]: ""
-  uio[3]: ""
+  uio[0]: "wb_sel[0]"
+  uio[1]: "wb_sel[1]"
+  uio[2]: "wb_sel[2]"
+  uio[3]: "wb_sel[3]"
   uio[4]: ""
   uio[5]: ""
   uio[6]: ""
