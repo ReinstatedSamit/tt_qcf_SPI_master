@@ -119,16 +119,16 @@ module simple_spi_top(
   always @(posedge clk_i or negedge rst_i)
     if (~rst_i)
       begin
-          spcr <= #1 8'h10;  // set master bit
-          sper <= #1 8'h00;
+          spcr <= 8'h10; //#1 8'h10;  // set master bit
+          sper <= 8'h00;//#1 8'h00;
       end
     else if (wb_wr)
       begin
         if (adr_i == 2'b00)
-          spcr <= #1 dat_i | 8'h10; // always set master bit
+          spcr <= dat_i | 8'h10;//#1 dat_i | 8'h10; // always set master bit
 
         if (adr_i == 2'b11)
-          sper <= #1 dat_i;
+          sper <= dat_i;//#1 dat_i;
       end
 
   // write fifo
@@ -138,10 +138,10 @@ module simple_spi_top(
   // dat_o
   always @(posedge clk_i)
     case(adr_i) // synopsys full_case parallel_case
-      2'b00: dat_o <= #1 spcr;
-      2'b01: dat_o <= #1 spsr;
-      2'b10: dat_o <= #1 rfdout;
-      2'b11: dat_o <= #1 sper;
+      2'b00: dat_o <= spcr;//#1 spcr;
+      2'b01: dat_o <= spsr;//#1 spsr;
+      2'b10: dat_o <=  rfdout;//#1 rfdout;
+      2'b11: dat_o <= sper;//#1 sper;
     endcase
 
   // read fifo
@@ -150,9 +150,9 @@ module simple_spi_top(
   // ack_o
   always @(posedge clk_i or negedge rst_i)
     if (~rst_i)
-      ack_o <= #1 1'b0;
+      ack_o <=  1'b0;// #1 1'b0;
     else
-      ack_o <= #1 wb_acc & !ack_o;
+      ack_o <=  wb_acc & !ack_o;//#1 wb_acc & !ack_o;
 
   // decode Serial Peripheral Control Register
   wire       spie = spcr[7];   // Interrupt enable bit
@@ -175,16 +175,16 @@ module simple_spi_top(
   reg spif;
   always @(posedge clk_i)
     if (~spe)
-      spif <= #1 1'b0;
+      spif <= 1'b0;//#1 1'b0;
     else
-      spif <= #1 (tirq | spif) & ~(wr_spsr & dat_i[7]);
+      spif <= (tirq | spif) & ~(wr_spsr & dat_i[7]);//#1 (tirq | spif) & ~(wr_spsr & dat_i[7]);
 
   reg wcol;
   always @(posedge clk_i)
     if (~spe)
-      wcol <= #1 1'b0;
+      wcol <= 1'b0;//#1 1'b0;
     else
-      wcol <= #1 (wfov | wcol) & ~(wr_spsr & dat_i[6]);
+      wcol <= (wfov | wcol) & ~(wr_spsr & dat_i[6]);//#1 (wfov | wcol) & ~(wr_spsr & dat_i[6]);
 
   assign spsr[7]   = spif;
   assign spsr[6]   = wcol;
@@ -197,7 +197,7 @@ module simple_spi_top(
 
   // generate IRQ output (inta_o)
   always @(posedge clk_i)
-    inta_o <= #1 spif & spie;
+    inta_o <= spif & spie; //#1 spif & spie;
 
   //
   // hookup read/write buffer fifo
@@ -230,7 +230,7 @@ module simple_spi_top(
   reg [11:0] clkcnt;
   always @(posedge clk_i)
     if(spe & (|clkcnt & |state))
-      clkcnt <= #1 clkcnt - 11'h1;
+      clkcnt <= clkcnt - 11'h1;//#1 clkcnt - 11'h1;
     else
       case (espr) // synopsys full_case parallel_case
         4'b0000: clkcnt <= 12'h0;//#1 12'h0;   // 2   -- original M68HC11 coding
