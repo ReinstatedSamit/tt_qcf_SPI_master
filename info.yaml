@@ -22,6 +22,7 @@ project:
     - "i2c_to_wb_if.v"
     - "i2c_to_wb_fsm.v"
     - "i2c_to_wb_config.v"
+    - "glitch_filter.v"
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
 pinout:
