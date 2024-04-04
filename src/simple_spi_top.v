@@ -233,18 +233,18 @@ module simple_spi_top(
       clkcnt <= #1 clkcnt - 11'h1;
     else
       case (espr) // synopsys full_case parallel_case
-        4'b0000: clkcnt <= #1 12'h0;   // 2   -- original M68HC11 coding
-        4'b0001: clkcnt <= #1 12'h1;   // 4   -- original M68HC11 coding
-        4'b0010: clkcnt <= #1 12'h3;   // 16  -- original M68HC11 coding
-        4'b0011: clkcnt <= #1 12'hf;   // 32  -- original M68HC11 coding
-        4'b0100: clkcnt <= #1 12'h1f;  // 8
-        4'b0101: clkcnt <= #1 12'h7;   // 64
-        4'b0110: clkcnt <= #1 12'h3f;  // 128
-        4'b0111: clkcnt <= #1 12'h7f;  // 256
-        4'b1000: clkcnt <= #1 12'hff;  // 512
-        4'b1001: clkcnt <= #1 12'h1ff; // 1024
-        4'b1010: clkcnt <= #1 12'h3ff; // 2048
-        4'b1011: clkcnt <= #1 12'h7ff; // 4096
+        4'b0000: clkcnt <= 12'h0;//#1 12'h0;   // 2   -- original M68HC11 coding
+        4'b0001: clkcnt <= 12'h1;  //#1 12'h1;   // 4   -- original M68HC11 coding
+        4'b0010: clkcnt <= 12'h3; //#1 12'h3;   // 16  -- original M68HC11 coding
+        4'b0011: clkcnt <= 12'hf; //#1 12'hf;   // 32  -- original M68HC11 coding
+        4'b0100: clkcnt <= 12'h1f; //#1 12'h1f;  // 8
+        4'b0101: clkcnt <= 12'h7; //#1 12'h7;   // 64
+        4'b0110: clkcnt <= 12'h3f; //#1 12'h3f;  // 128
+        4'b0111: clkcnt <= 12'h7f; //#1 12'h7f;  // 256
+        4'b1000: clkcnt <= 12'hff; //#1 12'hff;  // 512
+        4'b1001: clkcnt <= 12'h1ff; //#1 12'h1ff; // 1024
+        4'b1010: clkcnt <= 12'h3ff; //#1 12'h3ff; // 2048
+        4'b1011: clkcnt <= 12'h7ff; //#1 12'h7ff; // 4096
       endcase
 
   // generate clock enable signal
@@ -254,54 +254,54 @@ module simple_spi_top(
   always @(posedge clk_i)
     if (~spe)
       begin
-          state <= #1 2'b00; // idle
-          bcnt  <= #1 3'h0;
-          treg  <= #1 8'h00;
-          wfre  <= #1 1'b0;
-          rfwe  <= #1 1'b0;
-          sck_o <= #1 1'b0;
+          state <= 2'b00;//#1 2'b00; // idle
+          bcnt  <= 3'h0;//#1 3'h0;
+          treg  <=  8'h00;//#1 8'h00;
+          wfre  <= 1'b0//#1 1'b0;
+          rfwe  <= 1'b0;//#1 1'b0;
+          sck_o <= 1'b0;//#1 1'b0;
       end
     else
       begin
-         wfre <= #1 1'b0;
-         rfwe <= #1 1'b0;
+         wfre <= 1'b0;//#1 1'b0;
+         rfwe <= 1'b0;//#1 1'b0;
 
          case (state) //synopsys full_case parallel_case
            2'b00: // idle state
               begin
-                  bcnt  <= #1 3'h7;   // set transfer counter
-                  treg  <= #1 wfdout; // load transfer register
-                  sck_o <= #1 cpol;   // set sck
+                  bcnt  <= 3'h7;//#1 3'h7;   // set transfer counter
+                  treg  <= wfdout;//#1 wfdout; // load transfer register
+                  sck_o <= cpol;//#1 cpol;   // set sck
 
                   if (~wfempty) begin
-                    wfre  <= #1 1'b1;
-                    state <= #1 2'b01;
-                    if (cpha) sck_o <= #1 ~sck_o;
+                    wfre  <= 1'b1;//#1 1'b1;
+                    state <= 2'b01;//#1 2'b01;
+			  if (cpha) sck_o <=  ~sck_o;//#1 ~sck_o;
                   end
               end
 
            2'b01: // clock-phase2, next data
               if (ena) begin
-                sck_o   <= #1 ~sck_o;
-                state   <= #1 2'b11;
+                sck_o   <= ~sck_o; //#1 ~sck_o;
+                state   <=  2'b11;//#1 2'b11;
               end
 
            2'b11: // clock phase1
               if (ena) begin
-                treg <= #1 {treg[6:0], miso_i};
-                bcnt <= #1 bcnt -3'h1;
+                treg <= {treg[6:0], miso_i};//#1 {treg[6:0], miso_i};
+                bcnt <= bcnt -3'h1; //#1 bcnt -3'h1;
 
                 if (~|bcnt) begin
-                  state <= #1 2'b00;
-                  sck_o <= #1 cpol;
-                  rfwe  <= #1 1'b1;
+                  state <= //#1 2'b00;
+                  sck_o <= //#1 cpol;
+                  rfwe  <= //#1 1'b1;
                 end else begin
-                  state <= #1 2'b01;
-                  sck_o <= #1 ~sck_o;
+                  state <= 2'b01;//#1 2'b01;
+                  sck_o <= ~sck_o;//#1 ~sck_o;
                 end
               end
 
-           2'b10: state <= #1 2'b00;
+           2'b10: state <= 2'b00;//#1 2'b00;
          endcase
       end
 
@@ -312,12 +312,12 @@ module simple_spi_top(
   reg [1:0] tcnt; // transfer count
   always @(posedge clk_i)
     if (~spe)
-      tcnt <= #1 icnt;
+      tcnt <= icnt;//#1 icnt;
     else if (rfwe) // rfwe gets asserted when all bits have been transfered
       if (|tcnt)
-        tcnt <= #1 tcnt - 2'h1;
+        tcnt <= tcnt - 2'h1;//#1 tcnt - 2'h1;
       else
-        tcnt <= #1 icnt;
+        tcnt <= icnt;//#1 icnt;
 
   assign tirq = ~|tcnt & rfwe;
 
