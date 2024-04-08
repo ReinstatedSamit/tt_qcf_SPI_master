@@ -88,6 +88,9 @@ assign i2c_wb_data_i = spi_dat_o;
 assign spi_dat_i = i2c_wb_data_o;
 assign i2c_wb_addr_o = spi_adr_i;
 // Assuming single byte transfers for simplicity
+assign spi_clk_i = i2c_clk_in;
+assign spi_rst_i = i2c_wb_rst_i;
+    assign
 assign i2c_wb_we_o = spi_we_i;
 assign i2c_wb_cyc_o = spi_cyc_i;
 assign i2c_wb_stb_o = spi_stb_i;
