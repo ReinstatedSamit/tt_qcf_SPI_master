@@ -29,7 +29,7 @@ module tt_um_I2C_to_SPI (
     .i2c_wb_rst_i(rst_n),
     .sck_o(uo_out[0]),
     .mosi_o(uo_out[1]),
-     .wb_sel(uio_in[0:3])
+    .wb_sel[0:3](uio_in[0:3])
         
   );
     
