@@ -222,6 +222,7 @@ module
   assign i2c_data_oe  = i2c_data_oe_r;
   assign i2c_clk_out  = 1'b1;
   assign i2c_clk_oe   = 1'b0;
+  assign wb_sel_o     =4'b1111;
 
 endmodule
 
