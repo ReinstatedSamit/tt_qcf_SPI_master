@@ -29,12 +29,7 @@ module tt_um_I2C_to_SPI (
     .i2c_wb_rst_i(rst_n),
     .sck_o(uo_out[0]),
     .mosi_o(uo_out[1]),
-        .wb_sel[0](uio_in[0]),
-        .wb_sel[1](uio_in[1]),
-        .wb_sel[2](uio_in[2]),
-        .wb_sel[3](uio_in[3])
-        
-        
+        .wb_sel(uio_in[3:0])    
   );
     
   // All output pins must be assigned. If not used, assign to 0.
