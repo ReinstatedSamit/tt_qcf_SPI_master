@@ -11,7 +11,7 @@ module tt_um_I2C_SPI_Wrapper (
   
     input wire        i2c_wb_clk_i,
     input wire        i2c_wb_rst_i,
-    input wire        wb_sel[3:0]
+    input wire       [3:0] wb_sel
 );
 
 //SPI Interface
