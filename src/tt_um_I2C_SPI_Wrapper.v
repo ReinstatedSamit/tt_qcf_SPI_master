@@ -79,8 +79,8 @@ module tt_um_I2C_SPI_Wrapper (
         .wb_cyc_o(i2c_wb_cyc_o),
         .wb_stb_o(i2c_wb_stb_o),
         .wb_ack_i(i2c_wb_ack_i),
-        .i2c_wb_err_i(i2c_wb_err_i),
-        .i2c_wb_rty_i(i2c_wb_rty_i),
+        .wb_err_i(i2c_wb_err_i),
+        .wb_rty_i(i2c_wb_rty_i),
         .wb_clk_i(i2c_wb_clk_i),
         .wb_rst_i(i2c_wb_rst_i)
     );
