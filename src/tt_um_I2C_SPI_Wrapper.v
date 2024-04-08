@@ -10,8 +10,7 @@ module tt_um_I2C_SPI_Wrapper (
     input   wire           i2c_clk_in,
   
     input wire        i2c_wb_clk_i,
-    input wire        i2c_wb_rst_i,
-    input wire       [3:0] wb_sel
+    input wire        i2c_wb_rst_i
 );
 
 //SPI Interface
@@ -88,7 +87,7 @@ module tt_um_I2C_SPI_Wrapper (
 assign i2c_wb_data_i = spi_dat_o;
 assign spi_dat_i = i2c_wb_data_o;
 assign i2c_wb_addr_o = spi_adr_i;
-assign i2c_wb_sel_o = wb_sel; // Assuming single byte transfers for simplicity
+// Assuming single byte transfers for simplicity
 assign i2c_wb_we_o = spi_we_i;
 assign i2c_wb_cyc_o = spi_cyc_i;
 assign i2c_wb_stb_o = spi_stb_i;
