@@ -20,7 +20,7 @@ module tt_um_I2C_SPI_Wrapper (
   wire       spi_rst_i;         // reset (asynchronous active low)
   wire       spi_cyc_i;         // cycle
   wire       spi_stb_i;         // strobe
-  wire [1:0] spi_adr_i;         // ad;dress
+    wire [7:0] spi_adr_i;         // ad;dress
   wire       spi_we_i;          // write enable
   wire [7:0] spi_dat_i;         // data input
   wire  [7:0] spi_dat_o;         // data output
