@@ -10,7 +10,11 @@ module tt_um_I2C_SPI_Wrapper (
     input   wire           i2c_clk_in,
   
     input wire        i2c_wb_clk_i,
-    input wire        i2c_wb_rst_i
+    input wire        i2c_wb_rst_i,
+
+      // Wishbone error and retry inputs
+    input wire wb_err_i,
+    input wire wb_rty_i
 );
 
 //SPI Interface
@@ -90,7 +94,6 @@ assign i2c_wb_addr_o = spi_adr_i;
 // Assuming single byte transfers for simplicity
 assign spi_clk_i = i2c_clk_in;
 assign spi_rst_i = i2c_wb_rst_i;
-    assign
 assign i2c_wb_we_o = spi_we_i;
 assign i2c_wb_cyc_o = spi_cyc_i;
 assign i2c_wb_stb_o = spi_stb_i;
