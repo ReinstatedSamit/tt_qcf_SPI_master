@@ -76,7 +76,7 @@ module simple_spi_top(
   input  wire       rst_i,         // reset (asynchronous active low)
   input  wire       cyc_i,         // cycle
   input  wire       stb_i,         // strobe
-  input  wire [1:0] adr_i,         // address
+ input  wire [7:0] adr_i,         // address
   input  wire       we_i,          // write enable
   input  wire [7:0] dat_i,         // data input
   output reg  [7:0] dat_o,         // data output
