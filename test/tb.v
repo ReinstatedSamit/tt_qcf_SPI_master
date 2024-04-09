@@ -23,7 +23,7 @@ module tb ();
   wire [7:0] uio_oe;
 
   // Replace tt_um_example with your module name:
-  tt_um_I2C_to_SPI  usr_proj(
+  tt_um_I2C_to_SPI usr_proj(
       // Include power ports for the Gate Level test:
 `ifdef GL_TEST
       .VPWR(1'b1),
