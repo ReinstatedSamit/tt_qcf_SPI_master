@@ -88,14 +88,14 @@ module tt_um_I2C_SPI_Wrapper (
 // Connect SPI Wishbone interface to I2C to Wishbone interface
 assign i2c_wb_data_i = spi_dat_o;
 assign spi_dat_i = i2c_wb_data_o;
-assign i2c_wb_addr_o = spi_adr_i;
+assign spi_adr_i= i2c_wb_addr_o;
 // Assuming single byte transfers for simplicity
 assign spi_clk_i = i2c_clk_in;
 assign spi_rst_i = i2c_wb_rst_i;
 assign i2c_wb_we_o = spi_we_i;
-assign i2c_wb_cyc_o = spi_cyc_i;
-assign i2c_wb_stb_o = spi_stb_i;
-assign spi_ack_o = i2c_wb_ack_i;
+assign spi_cyc_i = i2c_wb_cyc_o;
+assign spi_stb_i = i2c_wb_stb_o;
+assign i2c_wb_ack_i = spi_ack_o;
 
 
 endmodule
