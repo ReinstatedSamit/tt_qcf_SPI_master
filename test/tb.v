@@ -24,7 +24,15 @@ module tb ();
 
   // Replace tt_um_example with your module name:
   tt_um_I2C_to_SPI (
-
+  .i2c_data_in(ui_in[0]),
+    .i2c_clk_in(ui_in[1]),
+    .miso_i(ui_in[2]),
+    .i2c_wb_clk_i(clk),
+    .i2c_wb_rst_i(rst_n),
+    .sck_o(uo_out[0]),
+        .mosi_o(uo_out[1]),
+        .i2c_wb_err_i(ui_in[5]),
+        .i2c_wb_rty_i(ui_in[6])
       // Include power ports for the Gate Level test:
 `ifdef GL_TEST
       .VPWR(1'b1),
