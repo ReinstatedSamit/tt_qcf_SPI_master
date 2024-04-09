@@ -5,7 +5,7 @@
 SIM ?= icarus
 TOPLEVEL_LANG ?= verilog
 SRC_DIR = $(PWD)/../src
-PROJECT_SOURCES = project.v
+PROJECT_SOURCES = tt_um_I2C_to_SPI.v, tt_um_I2C_SPI_Wrapper.v, simple_spi_top.v, i2c_to_wb_top.v, i2c_to_wb_if.v, i2c_to_wb_fsm.v, i2c_to_wb_config.v, glitch_filter.v
 
 ifneq ($(GATES),yes)
 
