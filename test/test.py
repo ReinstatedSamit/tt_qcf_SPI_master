@@ -29,4 +29,4 @@ dut._log.info("Start")
 
   await ClockCycles(dut.clk, 1)
 
-  assert dut.uo_out.value == b'xx
+  assert dut.uo_out.value == 0
