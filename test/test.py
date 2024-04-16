@@ -6,8 +6,8 @@ from cocotb.clock import Clock
 from cocotb.triggers import ClockCycles
 
 #@cocotb.test()
-'''async def test_project(dut):
-  dut._log.info("Start")
+async def test_project(dut):
+dut._log.info("Start")
   
   # Our example module doesn't use clock and reset, but we show how to use them here anyway.
   clock = Clock(dut.clk, 10, units="us")
@@ -24,9 +24,9 @@ from cocotb.triggers import ClockCycles
 
   # Set the input values, wait one clock cycle, and check the output
   dut._log.info("Test")
-  dut.ui_in.value = 20
-  dut.uio_in.value = 30
+  dut.ui_in.value = 2
+  dut.uio_in.value = 1
 
   await ClockCycles(dut.clk, 1)
 
-  assert dut.uo_out.value == 50'''
+  assert dut.uo_out.value == b'xx
