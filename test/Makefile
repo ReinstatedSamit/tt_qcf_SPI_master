@@ -12,7 +12,7 @@ src_4 = i2c_to_wb_if.v
 src_5 = i2c_to_wb_fsm.v
 src_6 = i2c_to_wb_config.v
 src_7 = glitch_filter.v
-src_8 = tt_um_I2C_to_SPI.v
+src_8 = tt_um_I2C_SPI_Wrapper.v
 
 ifneq ($(GATES),yes)
 
