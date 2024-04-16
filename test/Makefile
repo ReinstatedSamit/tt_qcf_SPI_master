@@ -13,6 +13,7 @@ src_5 = i2c_to_wb_fsm.v
 src_6 = i2c_to_wb_config.v
 src_7 = glitch_filter.v
 src_8 = tt_um_I2C_SPI_Wrapper.v
+src_9 = fifo4.v
 
 ifneq ($(GATES),yes)
 
@@ -26,6 +27,7 @@ VERILOG_SOURCES += $(addprefix $(SRC_DIR)/,$(src_4))
 VERILOG_SOURCES += $(addprefix $(SRC_DIR)/,$(src_5))
 VERILOG_SOURCES += $(addprefix $(SRC_DIR)/,$(src_6))
 VERILOG_SOURCES += $(addprefix $(SRC_DIR)/,$(src_7))
+VERILOG_SOURCES += $(addprefix $(SRC_DIR)/,$(src_9))
 COMPILE_ARGS 		+= -I$(SRC_DIR)
 
 else
