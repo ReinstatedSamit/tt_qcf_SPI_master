@@ -12,12 +12,14 @@ src_4 = i2c_to_wb_if.v
 src_5 = i2c_to_wb_fsm.v
 src_6 = i2c_to_wb_config.v
 src_7 = glitch_filter.v
+src_8 = tt_um_I2C_to_SPI.v
 
 ifneq ($(GATES),yes)
 
 # RTL simulation:
 SIM_BUILD				= sim_build/rtl
 VERILOG_SOURCES += $(addprefix $(SRC_DIR)/,$(PROJECT_SOURCES))
+VERILOG_SOURCES += $(addprefix $(SRC_DIR)/,$(src_8))
 VERILOG_SOURCES += $(addprefix $(SRC_DIR)/,$(src_2))
 VERILOG_SOURCES += $(addprefix $(SRC_DIR)/,$(src_3))
 VERILOG_SOURCES += $(addprefix $(SRC_DIR)/,$(src_4))
