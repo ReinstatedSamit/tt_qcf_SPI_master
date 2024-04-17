@@ -33,7 +33,7 @@ module tt_um_I2C_to_SPI (
         .i2c_wb_rty_i(ui_in[6])
   );
 
-  assign ui_in[1]=clk;
+
   // All output pins must be assigned. If not used, assign to 0.
   assign uo_out[2]  = 0;// Example: ou_out is the sum of ui_in and uio_in
   assign uo_out[3]  = 0;
