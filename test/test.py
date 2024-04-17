@@ -11,49 +11,51 @@ async def check_acknowledgment(dut):
         return False  # No acknowledgment (SDA remains high)
 @cocotb.test()
 async def test_project(dut):
+    # Initialize the DUT and clock
     dut._log.info("Starting test: Write data to I2C and read from SPI")
-    # Initialize clock
     clock = Clock(dut.clk, 10, units="us")
     cocotb.fork(clock.start())
-    # Reset
-    dut._log.info("Performing reset")
+    # Reset the DUT
     dut.rst_n <= 1
     await RisingEdge(dut.clk)
     dut.rst_n <= 0
     await RisingEdge(dut.clk)
     dut.rst_n <= 1
     await RisingEdge(dut.clk)
-    # Write data (0xAB) to the I2C bus
+    # Prepare the data to write (0xAB, or 171 in decimal)
     data_to_write = 0xAB
-    dut.ui_in[0] <= data_to_write
-    dut.ui_in[1] <= 1  # Start condition (SDA = data to write, SCL = high)
-    await RisingEdge(dut.clk)
-    # Clock high, keeping control signal high
-    dut.clk <= 1
-    await RisingEdge(dut.clk)
-    # Complete cycle by setting clock low and control signal low
-    dut.clk <= 0
-    dut.ui_in[1] <= 0  # End condition
-    await RisingEdge(dut.clk)
-    # Check for acknowledgment from the I2C slave
+    # Write 8-bit data to the I2C bus bit by bit
+    for i in range(8):
+        # Extract each bit from data_to_write
+        bit_to_write = (data_to_write >> i) & 0x1
+        # Write the bit to the 1-bit signal `ui_in[0]`
+        dut.ui_in[0] <= bit_to_write
+        # Perform one cycle with the clock high
+        dut.ui_in[1] <= 1  # Keep control signal high
+        dut.clk <= 1
+        await RisingEdge(dut.clk)
+        # Complete the cycle by setting the clock low and control signal low
+        dut.clk <= 0
+        dut.ui_in[1] <= 0  # Set control signal low
+        await RisingEdge(dut.clk)
+    # Check acknowledgment from the I2C slave
     acknowledgment = await check_acknowledgment(dut)
     if acknowledgment:
         dut._log.info("Data write successful; acknowledgment received.")
     else:
         dut._log.error("Data write failed; no acknowledgment received.")
-    # Trigger read operation from SPI side
-    dut.ui_in[2] <= 1  # Trigger SPI read
+    # Trigger a read operation on the SPI side
+    dut.ui_in[2] <= 1  # Trigger SPI read operation
     await RisingEdge(dut.clk)
     dut.ui_in[2] <= 0  # Complete SPI read trigger
     await RisingEdge(dut.clk)
-    # Check received data from SPI side
+    # Read the 8-bit data from the SPI side
     received_data = dut.uo_out.value
-    expected_data = 0xAB  # We expect the data to match the data written (0xAB)
-    # Assert that received data matches expected data
-    assert received_data == expected_data, f"Received data {hex(received_data)} does not match expected data {hex(expected_data)}"
+    # Compare the received data with the data written (0xAB)
+    assert received_data == data_to_write, f"Received data {hex(received_data)} does not match expected data {hex(data_to_write)}"
     # Log the success of the test case
-    dut._log.info(f"Test successful: Received data {hex(received_data)} matches expected data {hex(expected_data)}")
-        
+    dut._log.info(f"Test successful: Received data {hex(received_data)} matches expected data {hex(data_to_write)}")
+    
     '''
     # Test case 1: Write data to I2C
     dut._log.info("Test case 1: Write data to I2C")
