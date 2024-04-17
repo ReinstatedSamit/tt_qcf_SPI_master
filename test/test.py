@@ -56,7 +56,7 @@ async def test_project(dut):
         # Wait for the SPI clock rising edge
         await RisingEdge(dut.uo_out[0])
         # Read the current bit from `uo_out`
-        received_bit = int(dut.uo_out.value)
+        received_bit = int(dut.uo_out[1].value)
         # Shift the received data left by 1 and add the new bit
         received_data = (received_data << 1) | received_bit
     # Compare the received data with the expected data (`0xAB`)
