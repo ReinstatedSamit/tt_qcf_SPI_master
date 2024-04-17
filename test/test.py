@@ -45,14 +45,14 @@ async def test_project(dut):
     dut.ui_in[1] <= 0  # Set control signal low to indicate the end of a cycle
     await RisingEdge(dut.clk)
     # Check for the acknowledgment from the I2C device
-    # You may need to add a function to check if the data transfer was successful
+
     # Check I2C acknowledge signal (e.g., on a specific status flag or line)
     acknowledgment = check_acknowledgment(dut)
     if acknowledgment:
          dut._log.info("Data write successful.")
     else:
         dut._log.error("Data write failed or no acknowledgment received.")
-    # You may want to add more I2C operations or assertions here
+        
     '''
     # Test case 1: Write data to I2C
     dut._log.info("Test case 1: Write data to I2C")
