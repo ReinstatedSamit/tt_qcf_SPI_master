@@ -19,7 +19,7 @@ async def test_project(dut):
     
     dut._log.info("Test case 1: Write data to I2C")
     # Set the data to write to the I2C bus (data byte 0xAB)
-    data_to_write = 0xAB
+    data_to_write = 0b'1
     dut.ui_in[0] <= data_to_write
     # Generate a start condition
     dut.ui_in[1] <= 1  # Set control signal high to indicate start condition
