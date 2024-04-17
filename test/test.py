@@ -47,9 +47,9 @@ async def test_project(dut):
 
     # Trigger an SPI read operation
     dut.ui_in[2] <= 1  # Trigger SPI read operation
-    await RisingEdge(dut.clk)
+    await RisingEdge(dut.uo_out[0])
     dut.ui_in[2] <= 0  # Complete SPI read trigger
-    await RisingEdge(dut.clk)
+    await RisingEdge(dut.uo_out[0])
     # Read 8-bit data from the SPI side
     received_data = 0
     for i in range(8):
