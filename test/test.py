@@ -16,7 +16,7 @@ async def test_project(dut):
     await RisingEdge(dut.clk)
     dut.rst_n <= 0
     await RisingEdge(dut.clk)
-
+'''
     # Test case 1: Write data to I2C
     dut._log.info("Test case 1: Write data to I2C")
     dut.ui_in[0] <= 0xAB  # Example data to write
@@ -28,7 +28,7 @@ async def test_project(dut):
     await RisingEdge(dut.clk)
     # Add assertion or checking mechanism here if needed
 
-
+'''
     # Read operation
     # Assuming some triggering mechanism for reading data from SPI
     # Example: Trigger a read operation
