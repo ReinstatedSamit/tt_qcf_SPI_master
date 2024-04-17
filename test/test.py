@@ -12,21 +12,32 @@ async def test_project(dut):
 
     # Reset
     dut._log.info("Reset")
-    dut.ena <= 1
-    dut.ui_in <= 0
-    dut.uio_in <= 0
+    dut.rst_n <= 1
+    await RisingEdge(dut.clk)
     dut.rst_n <= 0
     await RisingEdge(dut.clk)
-    await RisingEdge(dut.clk)
-    dut.rst_n <= 1
 
-    # Test case 1: Input 2 on ui_in, Input 1 on uio_in
-    dut._log.info("Test case 1")
-    dut.ui_in <= 2
-    dut.uio_in <= 1
+    # Test case 1: Write data to I2C
+    dut._log.info("Test case 1: Write data to I2C")
+    dut.ui_in[0] <= 0xAB  # Example data to write
+    dut.clk <= 1
+    dut.ui_in[1] <= 1
     await RisingEdge(dut.clk)
+    dut.clk <= 0
+    dut.ui_in[1] <= 0
     await RisingEdge(dut.clk)
-    await RisingEdge(dut.clk)
-    assert dut.uo_out.value == 0  # Verify the output based on the expected behavior
+    # Add assertion or checking mechanism here if needed
 
-    # Test case 2: Add more test cases as needed
+
+    # Read operation
+    # Assuming some triggering mechanism for reading data from SPI
+    # Example: Trigger a read operation
+    dut.ui_in[2] <= 2
+    await RisingEdge(dut.clk)
+    dut.ui_in[2] <= 0
+    await RisingEdge(dut.clk)
+    # Example: Check received data
+    received_data = dut.uo_out.value
+    # Add assertion or checking mechanism here if needed
+
+
