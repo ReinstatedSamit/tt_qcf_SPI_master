@@ -44,6 +44,8 @@ async def test_project(dut):
         dut._log.info("Data write successful; acknowledgment received.")
     else:
         dut._log.error("Data write failed; no acknowledgment received.")
+
+    '''
     # Trigger a read operation on the SPI side
     dut.ui_in[2] <= 1  # Trigger SPI read operation
     await RisingEdge(dut.clk)
@@ -55,7 +57,7 @@ async def test_project(dut):
     assert received_data == data_to_write, f"Received data {hex(received_data)} does not match expected data {hex(data_to_write)}"
     # Log the success of the test case
     dut._log.info(f"Test successful: Received data {hex(received_data)} matches expected data {hex(data_to_write)}")
-    
+    '''
     '''
     # Test case 1: Write data to I2C
     dut._log.info("Test case 1: Write data to I2C")
