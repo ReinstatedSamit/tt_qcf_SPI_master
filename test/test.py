@@ -2,6 +2,19 @@ import cocotb
 from cocotb.clock import Clock
 from cocotb.triggers import RisingEdge
 
+async def check_acknowledgment(dut):
+    # Check the state of the SDA line
+    # If the SDA line is low, it indicates an acknowledgment (ack) from the slave
+    await RisingEdge(dut.clk)  # Wait for the rising edge of the clock signal
+    # Get the state of the SDA line
+    sda_state = dut.ui_in[0].value
+    # Return True if SDA is low (ack), False if SDA is high (nack)
+    if sda_state == 0:
+        return True  # Acknowledgment received
+    else:
+        return False  # No acknowledgment (nack) received
+
+
 @cocotb.test()
 async def test_project(dut):
     dut._log.info("Start")
