@@ -98,7 +98,7 @@ async def test_project(dut):
     dut.ui_in[2] <= 0
     await RisingEdge(dut.clk)
     # Example: Check received data
-    received_data = dut.uo_out.value
+    received_data = dut.uo_out[1].value
 
 
 
