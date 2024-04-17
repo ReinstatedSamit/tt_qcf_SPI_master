@@ -45,16 +45,16 @@ async def test_project(dut):
     else:
         dut._log.error("Data write failed; no acknowledgment received.")
 
-    '''# Trigger an SPI read operation
+    # Trigger an SPI read operation
     dut.ui_in[2] <= 1  # Trigger SPI read operation
-    await RisingEdge(dut.uo_out[0])
+    await RisingEdge(dut.clk)
     dut.ui_in[2] <= 0  # Complete SPI read trigger
-    await RisingEdge(dut.uo_out[0])
+    await RisingEdge(dut.clk)
     # Read 8-bit data from the SPI side
     received_data = 0
     for i in range(8):
         # Wait for the SPI clock rising edge
-        await RisingEdge(dut.uo_out[0])
+        await RisingEdge(dut.clk)
         # Read the current bit from `uo_out`
         received_bit = int(dut.uo_out[1].value)
         # Shift the received data left by 1 and add the new bit
@@ -63,7 +63,7 @@ async def test_project(dut):
     assert received_data == data_to_write, f"Received data {hex(received_data)} does not match expected data {hex(data_to_write)}"
     # Log the success of the test case
     dut._log.info(f"Test successful: Received data {hex(received_data)} matches expected data {hex(data_to_write)}")
-    '''
+    
     '''
     # Trigger a read operation on the SPI side
     dut.ui_in[2] <= 1  # Trigger SPI read operation
