@@ -1,57 +1,58 @@
 import cocotb
 from cocotb.clock import Clock
 from cocotb.triggers import RisingEdge
-
+# Function to check acknowledgment from the I2C slave
 async def check_acknowledgment(dut):
-    # Check the state of the SDA line
-    # If the SDA line is low, it indicates an acknowledgment (ack) from the slave
-    await RisingEdge(dut.clk)  # Wait for the rising edge of the clock signal
-    # Get the state of the SDA line
+    await RisingEdge(dut.clk)
     sda_state = dut.ui_in[0].value
-    # Return True if SDA is low (ack), False if SDA is high (nack)
     if sda_state == 0:
-        return True  # Acknowledgment received
+        return True  # Acknowledgment received (SDA pulled low by slave)
     else:
-        return False  # No acknowledgment (nack) received
-
-
+        return False  # No acknowledgment (SDA remains high)
 @cocotb.test()
 async def test_project(dut):
-    dut._log.info("Start")
-
-    # Our example module doesn't use clock and reset, but we show how to use them here anyway.
+    dut._log.info("Starting test: Write data to I2C and read from SPI")
+    # Initialize clock
     clock = Clock(dut.clk, 10, units="us")
     cocotb.fork(clock.start())
-
     # Reset
-    dut._log.info("Reset")
+    dut._log.info("Performing reset")
     dut.rst_n <= 1
     await RisingEdge(dut.clk)
     dut.rst_n <= 0
     await RisingEdge(dut.clk)
-
-    # Set the data to write to the I2C bus (data byte 0xAB)
-    data_to_write = 1
-    dut.ui_in[0] <= data_to_write
-    # Generate a start condition
-    dut.ui_in[1] <= 1  # Set control signal high to indicate start condition
+    dut.rst_n <= 1
     await RisingEdge(dut.clk)
-    # Perform one cycle with the clock high, keeping control signal high
-    # This might simulate an SCL high phase while data is held on the SDA line
+    # Write data (0xAB) to the I2C bus
+    data_to_write = 0xAB
+    dut.ui_in[0] <= data_to_write
+    dut.ui_in[1] <= 1  # Start condition (SDA = data to write, SCL = high)
+    await RisingEdge(dut.clk)
+    # Clock high, keeping control signal high
     dut.clk <= 1
     await RisingEdge(dut.clk)
-    # Complete the cycle by setting the clock low and control signal low
+    # Complete cycle by setting clock low and control signal low
     dut.clk <= 0
-    dut.ui_in[1] <= 0  # Set control signal low to indicate the end of a cycle
+    dut.ui_in[1] <= 0  # End condition
     await RisingEdge(dut.clk)
-    # Check for the acknowledgment from the I2C device
-
-    # Check I2C acknowledge signal (e.g., on a specific status flag or line)
-    acknowledgment = check_acknowledgment(dut)
+    # Check for acknowledgment from the I2C slave
+    acknowledgment = await check_acknowledgment(dut)
     if acknowledgment:
-         dut._log.info("Data write successful.")
+        dut._log.info("Data write successful; acknowledgment received.")
     else:
-        dut._log.error("Data write failed or no acknowledgment received.")
+        dut._log.error("Data write failed; no acknowledgment received.")
+    # Trigger read operation from SPI side
+    dut.ui_in[2] <= 1  # Trigger SPI read
+    await RisingEdge(dut.clk)
+    dut.ui_in[2] <= 0  # Complete SPI read trigger
+    await RisingEdge(dut.clk)
+    # Check received data from SPI side
+    received_data = dut.uo_out.value
+    expected_data = 0xAB  # We expect the data to match the data written (0xAB)
+    # Assert that received data matches expected data
+    assert received_data == expected_data, f"Received data {hex(received_data)} does not match expected data {hex(expected_data)}"
+    # Log the success of the test case
+    dut._log.info(f"Test successful: Received data {hex(received_data)} matches expected data {hex(expected_data)}")
         
     '''
     # Test case 1: Write data to I2C
