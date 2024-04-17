@@ -39,5 +39,6 @@ async def test_project(dut):
     # Example: Check received data
     received_data = dut.uo_out.value
     # Add assertion or checking mechanism here if needed
+    assert received_data == dut.uo_out.value
 
 
