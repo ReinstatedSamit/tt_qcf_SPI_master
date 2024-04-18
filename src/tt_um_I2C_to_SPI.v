@@ -13,7 +13,11 @@ module tt_um_I2C_to_SPI (
 
 reg MOD_bi;
 reg temp_data_in;
-reg temp_clk_in;    
+reg temp_clk_in; 
+reg temp_data_out;
+reg temp_clk_out;
+reg temp_data_oe;
+reg temp_clk_oe;
 assign MOD_bi = ui_in[3];
 /*  tt_um_I2C_SPI_Wrapper wrapper_inst(
     .i2c_data_in(ui_in[0]),
@@ -35,10 +39,10 @@ assign MOD_bi = ui_in[3];
         .mosi_o(uo_out[1]),
         .i2c_wb_err_i(ui_in[5]),
         .i2c_wb_rty_i(ui_in[6]),
-        .i2c_data_out(uo_out[2]),
-        .i2c_clk_out(uo_out[3]),
-        .i2c_data_oe(uo_out[4]),
-        .i2c_clk_oe(uo_out[5])
+        .i2c_data_out(temp_data_out),
+        .i2c_clk_out(temp_clk_out),
+        .i2c_data_oe(temp_data_oe),
+        .i2c_clk_oe(temp_clk_oe)
       
         
   );
@@ -56,15 +60,23 @@ always @* begin
         temp_clk_in <= uio_in[1];
       //  uio_in[0] <= ui_in[0];
      //   uio_in[1] <= ui_in[1];
-        uio_out[0] <= uo_out[2];
-        uio_out[1] <= uo_out[3];
-        uio_oe[0] <= uo_out[4];
-        uio_oe[1] <= uo_out[5];
+        uio_out[0] <= temp_data_out;
+        uio_out[1] <= temp_clk_out;
+        uio_oe[0] <= temp_data_oe;
+        uio_oe[1] <= temp_clk_oe;
+        uo_out[2] <= temp_data_out;
+        uo_out[3] <= temp_clk_out;
+        uo_out[4] <= temp_data_oe;
+        uo_out[5] <= temp_clk_oe;
     end
     else begin
          // Assign default values if MOD_bi is 0
         temp_data_in <= ui_in[0];
         temp_clk_in <= ui_in[1];
+        uo_out[2] <= temp_data_out;
+        uo_out[3] <= temp_clk_out;
+        uo_out[4] <= temp_data_oe;
+        uo_out[5] <= temp_clk_oe;
         uio_out[0] <= 0;
         uio_out[1] <= 0;
         uio_oe[0] <= 0;
