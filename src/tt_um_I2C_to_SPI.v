@@ -12,8 +12,8 @@ module tt_um_I2C_to_SPI (
 );
 
 reg MOD_bi;
-wire temp_data_in;
-wire temp_clk_in;    
+reg temp_data_in;
+reg temp_clk_in;    
 assign MOD_bi = ui_in[3];
 /*  tt_um_I2C_SPI_Wrapper wrapper_inst(
     .i2c_data_in(ui_in[0]),
