@@ -3,6 +3,7 @@ from cocotb.clock import Clock
 from cocotb.triggers import RisingEdge
 # Function to check acknowledgment from the I2C slave
 async def check_acknowledgment(dut):
+    dut.ui_in[3] <= 0
     await RisingEdge(dut.clk)
     sda_state = dut.ui_in[0].value
     if sda_state == 0:
@@ -15,6 +16,7 @@ async def test_project(dut):
     dut._log.info("Starting test: Write data to I2C and read from SPI")
     clock = Clock(dut.clk, 10, units="us")
     cocotb.fork(clock.start())
+    dut.ui_in[3] <= 0
     # Reset the DUT
     dut.rst_n <= 1
     await RisingEdge(dut.clk)
@@ -46,6 +48,7 @@ async def test_project(dut):
         dut._log.error("Data write failed; no acknowledgment received.")
 
     # Trigger an SPI read operation
+    dut.ui_in[3] <= 0
     dut.ui_in[2] <= 1  # Trigger SPI read operation
     await RisingEdge(dut.clk)
     dut.ui_in[2] <= 0  # Complete SPI read trigger
@@ -95,6 +98,7 @@ async def test_project(dut):
     # Read operation
     # Assuming some triggering mechanism for reading data from SPI
     # Example: Trigger a read operation
+    dut.ui_in[3] <= 0
     dut.ui_in[2] <= 1
     await RisingEdge(dut.clk)
     dut.ui_in[2] <= 0
