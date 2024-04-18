@@ -12,7 +12,7 @@ module tt_um_I2C_to_SPI (
 );
 
 reg MOD_bi;
-    assign MOD_bi = ui_in[3];
+assign MOD_bi = ui_in[3];
 /*  tt_um_I2C_SPI_Wrapper wrapper_inst(
     .i2c_data_in(ui_in[0]),
     .i2c_clk_in(ui_in[1]),
@@ -48,13 +48,23 @@ reg MOD_bi;
         .i2c_data_oe(uio_oe[0]),
         .i2c_clk_oe(uio_oe[1]) */
   // All output pins must be assigned. If not used, assign to 0.
+always @* begin
     if (MOD_bi) begin
-  assign uio_in[0]= ui_in[0];
-  assign uio_in[1]= ui_in[1];
-  assign uio_out[0]= uo_out[2];
-  assign uio_out[1]= uo_out[3];
-  assign uio_oe[0]= uo_out[4];
-  assign uio_oe[1]= uo_out[5];
+        uio_in[0] = ui_in[0];
+        uio_in[1] = ui_in[1];
+        uio_out[0] = uo_out[2];
+        uio_out[1] = uo_out[3];
+        uio_oe[0] = uo_out[4];
+        uio_oe[1] = uo_out[5];
+    end
+    else begin
+        uio_in[0] = 0; // Assign default values if MOD_bi is 0
+        uio_in[1] = 0;
+        uio_out[0] = 0;
+        uio_out[1] = 0;
+        uio_oe[0] = 0;
+        uio_oe[1] = 0;
+    end
 end
     
   assign uo_out[6]  = 0;
