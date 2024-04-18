@@ -40,7 +40,7 @@ module tt_um_I2C_to_SPI (
         .i2c_data_in(uio_in[0]),
         .i2c_clk_in(uio_in[1]),
         .i2c_data_oe(uio_oe[0]),
-        .i2c_clk_oe(uio_oe[1]),
+        .i2c_clk_oe(uio_oe[1])
         
   );
 
