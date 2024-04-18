@@ -12,6 +12,8 @@ module tt_um_I2C_to_SPI (
 );
 
 reg MOD_bi;
+wire temp_data_in;
+wire temp_clk_in;    
 assign MOD_bi = ui_in[3];
 /*  tt_um_I2C_SPI_Wrapper wrapper_inst(
     .i2c_data_in(ui_in[0]),
@@ -24,7 +26,7 @@ assign MOD_bi = ui_in[3];
   );*/
 
     tt_um_I2C_SPI_Wrapper wrapper_inst(
-    .i2c_data_in(ui_in[0]),
+    .i2c_data_in(),
     .i2c_clk_in(ui_in[1]),
     .miso_i(ui_in[2]),
     .i2c_wb_clk_i(clk),
@@ -58,8 +60,7 @@ always @* begin
         uio_oe[1] <= uo_out[5];
     end
     else begin
-        uio_in[0] <= 0; // Assign default values if MOD_bi is 0
-        uio_in[1] <= 0;
+         // Assign default values if MOD_bi is 0
         uio_out[0] <= 0;
         uio_out[1] <= 0;
         uio_oe[0] <= 0;
