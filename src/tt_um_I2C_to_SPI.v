@@ -56,31 +56,31 @@ assign MOD_bi = ui_in[3];
   // All output pins must be assigned. If not used, assign to 0.
 always @* begin
     if (MOD_bi) begin
-        temp_data_in <= uio_in[0];
-        temp_clk_in <= uio_in[1];
+       temp_data_in = uio_in[0];
+       temp_clk_in = uio_in[1];
       //  uio_in[0] <= ui_in[0];
      //   uio_in[1] <= ui_in[1];
-        uio_out[0] <= temp_data_out;
-        uio_out[1] <= temp_clk_out;
-        uio_oe[0] <= temp_data_oe;
-        uio_oe[1] <= temp_clk_oe;
-        uo_out[2] <= temp_data_out;
-        uo_out[3] <= temp_clk_out;
-        uo_out[4] <= temp_data_oe;
-        uo_out[5] <= temp_clk_oe;
+        uio_out[0] = temp_data_out;
+        uio_out[1] = temp_clk_out;
+        uio_oe[0] = temp_data_oe;
+        uio_oe[1] = temp_clk_oe;
+        uo_out[2] = temp_data_out;
+        uo_out[3] = temp_clk_out;
+        uo_out[4] = temp_data_oe;
+        uo_out[5] = temp_clk_oe;
     end
     else begin
          // Assign default values if MOD_bi is 0
-        temp_data_in <= ui_in[0];
-        temp_clk_in <= ui_in[1];
-        uo_out[2] <= temp_data_out;
-        uo_out[3] <= temp_clk_out;
-        uo_out[4] <= temp_data_oe;
-        uo_out[5] <= temp_clk_oe;
-        uio_out[0] <= 0;
-        uio_out[1] <= 0;
-        uio_oe[0] <= 0;
-        uio_oe[1] <= 0;
+        temp_data_in = ui_in[0];
+        temp_clk_in = ui_in[1];
+        uo_out[2] = temp_data_out;
+        uo_out[3] = temp_clk_out;
+        uo_out[4] = temp_data_oe;
+        uo_out[5] = temp_clk_oe;
+        uio_out[0] = 0;
+        uio_out[1] = 0;
+        uio_oe[0] = 0;
+        uio_oe[1] = 0;
     end
 end
     
