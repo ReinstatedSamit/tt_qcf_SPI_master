@@ -88,7 +88,11 @@ end
   assign uo_out[7]  = 0;
 
 
-
+assign uio_out[2] =0;
+assign uio_out[3] =0;
+assign uio_out[4] =0;
+assign uio_out[5]=0;
+   
   assign uio_out[6] = 0;
   assign uio_out[7] = 0;
 
