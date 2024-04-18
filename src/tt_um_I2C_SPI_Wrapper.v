@@ -12,10 +12,10 @@ module tt_um_I2C_SPI_Wrapper (
     input wire        i2c_wb_clk_i,
     input wire        i2c_wb_rst_i,
 
-    output wire       i2c_data_out;
-    output wire       i2c_clk_out;
-    output wire       i2c_data_oe;
-    output wire       i2c_clk_oe;
+    output wire       i2c_data_out,
+    output wire       i2c_clk_out,
+    output wire       i2c_data_oe,
+    output wire       i2c_clk_oe,
 
       // Wishbone error and retry inputs
     input wire i2c_wb_err_i,
