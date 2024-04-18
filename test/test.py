@@ -4,7 +4,7 @@ from cocotb.triggers import RisingEdge
 # Function to check acknowledgment from the I2C slave
 async def check_acknowledgment(dut):
     await RisingEdge(dut.clk)
-    sda_state = dut.ui_in[0].value
+    sda_state = dut.uo_out[2].value
     if sda_state == 0:
         return True  # Acknowledgment received (SDA pulled low by slave)
     else:
