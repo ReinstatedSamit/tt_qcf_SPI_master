@@ -26,8 +26,8 @@ assign MOD_bi = ui_in[3];
   );*/
 
     tt_um_I2C_SPI_Wrapper wrapper_inst(
-    .i2c_data_in(),
-    .i2c_clk_in(ui_in[1]),
+        .i2c_data_in(temp_data_in),
+        .i2c_clk_in(temp_clk_in),
     .miso_i(ui_in[2]),
     .i2c_wb_clk_i(clk),
     .i2c_wb_rst_i(rst_n),
@@ -52,8 +52,10 @@ assign MOD_bi = ui_in[3];
   // All output pins must be assigned. If not used, assign to 0.
 always @* begin
     if (MOD_bi) begin
-        uio_in[0] <= ui_in[0];
-        uio_in[1] <= ui_in[1];
+        temp_data_in <= uio_in[0];
+        temp_clk_in <= uio_in[1];
+      //  uio_in[0] <= ui_in[0];
+     //   uio_in[1] <= ui_in[1];
         uio_out[0] <= uo_out[2];
         uio_out[1] <= uo_out[3];
         uio_oe[0] <= uo_out[4];
@@ -61,6 +63,8 @@ always @* begin
     end
     else begin
          // Assign default values if MOD_bi is 0
+        temp_data_in <= ui_in[0];
+        temp_clk_in <= ui_in[1];
         uio_out[0] <= 0;
         uio_out[1] <= 0;
         uio_oe[0] <= 0;
