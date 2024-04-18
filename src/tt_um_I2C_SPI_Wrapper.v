@@ -46,11 +46,8 @@ module tt_um_I2C_SPI_Wrapper (
     wire         i2c_wb_cyc_o;
     wire         i2c_wb_stb_o;
     wire        i2c_wb_ack_i;
-    wire        i2c_data_out;
-    wire        i2c_clk_out;
-    wire        i2c_data_oe;
-    wire        i2c_clk_oe;
-
+  
+    
 
 
 
