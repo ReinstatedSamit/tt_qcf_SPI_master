@@ -50,20 +50,20 @@ assign MOD_bi = ui_in[3];
   // All output pins must be assigned. If not used, assign to 0.
 always @* begin
     if (MOD_bi) begin
-        uio_in[0] = ui_in[0];
-        uio_in[1] = ui_in[1];
-        uio_out[0] = uo_out[2];
-        uio_out[1] = uo_out[3];
-        uio_oe[0] = uo_out[4];
-        uio_oe[1] = uo_out[5];
+        uio_in[0] <= ui_in[0];
+        uio_in[1] <= ui_in[1];
+        uio_out[0] <= uo_out[2];
+        uio_out[1] <= uo_out[3];
+        uio_oe[0] <= uo_out[4];
+        uio_oe[1] <= uo_out[5];
     end
     else begin
-        uio_in[0] = 0; // Assign default values if MOD_bi is 0
-        uio_in[1] = 0;
-        uio_out[0] = 0;
-        uio_out[1] = 0;
-        uio_oe[0] = 0;
-        uio_oe[1] = 0;
+        uio_in[0] <= 0; // Assign default values if MOD_bi is 0
+        uio_in[1] <= 0;
+        uio_out[0] <= 0;
+        uio_out[1] <= 0;
+        uio_oe[0] <= 0;
+        uio_oe[1] <= 0;
     end
 end
     
