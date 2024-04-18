@@ -46,6 +46,16 @@ module tt_um_I2C_to_SPI (
         .i2c_data_oe(uio_oe[0]),
         .i2c_clk_oe(uio_oe[1]) */
   // All output pins must be assigned. If not used, assign to 0.
+if (ui_in[3])
+begin
+  assign uio_in[0]= ui_in[0];
+  assign uio_in[1]= ui_in[1];
+  assign uio_out[0]= uo_out[2];
+  assign uio_out[1]= uo_out[3];
+  assign uio_oe[0]= uo_out[4];
+  assign uio_oe[1]= uo_out[5];
+end
+    
   assign uo_out[6]  = 0;
   assign uo_out[7]  = 0;
 
