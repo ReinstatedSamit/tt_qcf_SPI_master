@@ -24,7 +24,9 @@ project:
     - "i2c_to_wb_config.v"
     - "glitch_filter.v"
     - "fifo4.v"
-
+ 
+     
+  
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
 pinout:
   # Inputs
@@ -40,16 +42,16 @@ pinout:
   # Outputs
   uo[0]: "sck_o"
   uo[1]: "mosi_o"
-  uo[2]: ""
-  uo[3]: ""
-  uo[4]: ""
-  uo[5]: ""
+  uo[2]: "i2c_data_out"
+  uo[3]: "i2c_clk_out"
+  uo[4]: "i2c_data_oe"
+  uo[5]: "i2c_clk_oe"
   uo[6]: ""
   uo[7]: ""
 
   # Bidirectional pins
-  uio[0]: ""
-  uio[1]: ""
+  uio[0]: "i2c_data_out"
+  uio[1]: "i2c_clk_out"
   uio[2]: ""
   uio[3]: ""
   uio[4]: ""
