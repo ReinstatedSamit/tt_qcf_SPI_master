@@ -1,4 +1,4 @@
-`default_netname none
+`define default_netname none
 
 module tt_um_I2C_to_SPI (
     input  wire [7:0] ui_in,    // Dedicated inputs
