@@ -58,8 +58,8 @@ module tt_um_I2C_to_SPI (
   assign uio_out[6] = 0;
   assign uio_out[7] = 0;
 
-  assign uio_out[0] = 0;
-  assign uio_out[1] = 0;
+  assign uio_oe[0] = 0;
+  assign uio_oe[1] = 0;
   assign uio_oe[2]  = 0;
   assign uio_oe[3]  = 0;
   assign uio_oe[4]  = 0;
