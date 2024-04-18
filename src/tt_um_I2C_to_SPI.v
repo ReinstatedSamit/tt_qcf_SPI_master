@@ -11,6 +11,8 @@ module tt_um_I2C_to_SPI (
     input  wire       rst_n     // reset_n - low to reset
 );
 
+reg MOD_bi;
+    assign MOD_bi = ui_in[3];
 /*  tt_um_I2C_SPI_Wrapper wrapper_inst(
     .i2c_data_in(ui_in[0]),
     .i2c_clk_in(ui_in[1]),
@@ -46,8 +48,7 @@ module tt_um_I2C_to_SPI (
         .i2c_data_oe(uio_oe[0]),
         .i2c_clk_oe(uio_oe[1]) */
   // All output pins must be assigned. If not used, assign to 0.
-if (ui_in[3])
-begin
+    if (MOD_bi) begin
   assign uio_in[0]= ui_in[0];
   assign uio_in[1]= ui_in[1];
   assign uio_out[0]= uo_out[2];
